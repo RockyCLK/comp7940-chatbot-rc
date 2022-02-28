@@ -35,6 +35,9 @@ def main():
     dispatcher.add_handler(CommandHandler("add", add))
     dispatcher.add_handler(CommandHandler("help", help_command))
 
+    # on commands for Q3 in Writeup
+    dispatcher.add_handler(CommandHandler("hello", hello_cmd))
+
     # To start the bot:
     updater.start_polling()
     updater.idle()
@@ -61,6 +64,11 @@ def add(update: Update, context: CallbackContext) -> None:
         update.message.reply_text('You have said '+ msg + ' for ' + redis1.get(msg).decode('UTF-8') + ' times.')
     except:
         update.message.reply_text('Usage: /add <keyword>')
+
+#function for hello command
+def hello_cmd(update: Update, context: CallbackContext) -> None:
+    msg = context.args[0]
+    update.message.reply_text('Good day '+ msg + '!')
 
 if __name__ == '__main__':
     main()
